@@ -1,9 +1,17 @@
 class Stack {
 
-    private var empty: Boolean = true
+    private var size: Int = 0
 
     fun isEmpty(): Boolean {
-        return empty
+        return size == 0
+    }
+
+    fun getSize(): Int {
+        return size
+    }
+
+    fun push(element: Int) {
+        size++
     }
 
 }
