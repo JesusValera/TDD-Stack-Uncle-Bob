@@ -48,4 +48,9 @@ class StackTest {
         assertEquals(1, stack.pop())
     }
 
+    @Test
+    fun whenCreatingSackWithNegativeSize_ShouldThrowIllegalCapacity() {
+        assertThrows<Stack.IllegalCapacity> { Stack.Make(-1) }
+    }
+
 }

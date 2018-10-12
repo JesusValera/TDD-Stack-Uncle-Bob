@@ -1,11 +1,9 @@
 import java.lang.RuntimeException
 
-class Stack private constructor(
-        private val capacity: Int,
-        private val elements: IntArray = IntArray(capacity)
-) {
+class Stack private constructor(private val capacity: Int) {
 
     private var size: Int = 0
+    private val elements: IntArray
 
     companion object {
         fun Make(capacity: Int): Stack {
@@ -30,8 +28,17 @@ class Stack private constructor(
         return elements[--size]
     }
 
+    init {
+        if (capacity < 0) {
+            throw IllegalCapacity()
+        }
+        this.elements = IntArray(capacity)
+    }
+
     class Overflow : RuntimeException()
 
     class Underflow : RuntimeException()
+
+    class IllegalCapacity : RuntimeException()
 
 }
