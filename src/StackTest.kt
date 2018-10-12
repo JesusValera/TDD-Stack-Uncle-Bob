@@ -40,4 +40,12 @@ class StackTest {
         assertThrows<Stack.Underflow> { stack.pop() }
     }
 
+    @Test
+    fun whenOneAndTwoArePushed_TwoAndOneArePopped() {
+        stack.push(1)
+        stack.push(2)
+        assertEquals(2, stack.pop())
+        assertEquals(1, stack.pop())
+    }
+
 }

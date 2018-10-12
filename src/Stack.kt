@@ -1,6 +1,9 @@
 import java.lang.RuntimeException
 
-class Stack private constructor(val capacity: Int) {
+class Stack private constructor(
+        private val capacity: Int,
+        private val elements: IntArray = IntArray(capacity)
+) {
 
     private var size: Int = 0
 
@@ -10,24 +13,21 @@ class Stack private constructor(val capacity: Int) {
         }
     }
 
-    fun isEmpty(): Boolean {
-        return size == 0
-    }
+    fun isEmpty(): Boolean = (size == 0)
 
-    fun getSize(): Int {
-        return size
-    }
+    fun getSize(): Int = size
 
     fun push(element: Int) {
         if (size == capacity)
             throw Overflow()
-        size++
+        elements[size++] = element
     }
 
     fun pop(): Int {
         if (isEmpty())
             throw Underflow()
-        return --size
+
+        return elements[--size]
     }
 
     class Overflow : RuntimeException()
