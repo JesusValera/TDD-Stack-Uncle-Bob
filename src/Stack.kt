@@ -24,7 +24,14 @@ class Stack private constructor(val capacity: Int) {
         size++
     }
 
-    fun pop(): Int = --size
+    fun pop(): Int {
+        if (isEmpty())
+            throw Underflow()
+        return --size
+    }
 
     class Overflow : RuntimeException()
+
+    class Underflow : RuntimeException()
+
 }

@@ -32,9 +32,12 @@ class StackTest {
     fun whenPushedPastLimit_StackOverflows() {
         stack.push(1)
         stack.push(1)
-        assertThrows<Stack.Overflow>("Should throw an exception") {
-            stack.push(1)
-        }
+        assertThrows<Stack.Overflow> { stack.push(1) }
+    }
+
+    @Test
+    fun whenEmptyStackIsPopped_ShouldThrowUnderflow() {
+        assertThrows<Stack.Underflow> { stack.pop() }
     }
 
 }
