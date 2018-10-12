@@ -14,4 +14,6 @@ class Stack {
         size++
     }
 
+    fun pop(): Int = --size
+
 }
