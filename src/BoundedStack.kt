@@ -6,9 +6,9 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
     private var size: Int = 0
 
     companion object {
-        fun Make(capacity: Int): Stack {
+        fun make(capacity: Int): Stack {
             if (capacity < 0)
-                throw IllegalCapacity()
+                throw Stack.IllegalCapacity()
             if (capacity == 0)
                 return ZeroCapacityStack()
 
@@ -34,14 +34,15 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
     }
 
     override fun top(): Int {
+        if (isEmpty())
+            throw Stack.Empty()
+
         return elements[size - 1]
     }
 
     class Overflow : RuntimeException()
 
     class Underflow : RuntimeException()
-
-    class IllegalCapacity : RuntimeException()
 
     private class ZeroCapacityStack : Stack {
 
@@ -62,7 +63,7 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
         }
 
         override fun top(): Int {
-            return -1
+            throw Stack.Empty()
         }
     }
 
