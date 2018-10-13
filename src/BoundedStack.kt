@@ -1,5 +1,3 @@
-import java.lang.RuntimeException
-
 class BoundedStack private constructor(private val capacity: Int) : Stack {
 
     private val elements: IntArray = IntArray(capacity)
@@ -22,13 +20,13 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
 
     override fun push(element: Int) {
         if (size == capacity)
-            throw Overflow()
+            throw Stack.Overflow()
         elements[size++] = element
     }
 
     override fun pop(): Int {
         if (isEmpty())
-            throw Underflow()
+            throw Stack.Underflow()
 
         return elements[--size]
     }
@@ -40,9 +38,14 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
         return elements[size - 1]
     }
 
-    class Overflow : RuntimeException()
+    override fun find(element: Int): Int {
+        for (i in (size - 1) downTo 0) {
+            if (element == elements[size - 1 - i])
+                return i
+        }
 
-    class Underflow : RuntimeException()
+        return -1
+    }
 
     private class ZeroCapacityStack : Stack {
 
@@ -55,15 +58,19 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
         }
 
         override fun push(element: Int) {
-            throw Overflow()
+            throw Stack.Overflow()
         }
 
         override fun pop(): Int {
-            throw Underflow()
+            throw Stack.Underflow()
         }
 
         override fun top(): Int {
             throw Stack.Empty()
+        }
+
+        override fun find(element: Int): Int {
+            return -1
         }
     }
 

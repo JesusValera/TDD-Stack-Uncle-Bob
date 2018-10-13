@@ -12,8 +12,11 @@ interface Stack {
 
     fun top(): Int
 
-    class IllegalCapacity : RuntimeException()
+    fun find(element: Int): Int
 
+    class IllegalCapacity : RuntimeException()
     class Empty : RuntimeException()
+    class Overflow : RuntimeException()
+    class Underflow : RuntimeException()
 
 }
