@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 
 class StackTest {
 
-    private val stack: Stack = Stack.Make(2)
+    private var stack: Stack = BoundedStack.Make(2)
 
     @Test
     fun newlyCreateStack_ShouldBeEmpty() {
@@ -32,12 +32,12 @@ class StackTest {
     fun whenPushedPastLimit_StackOverflows() {
         stack.push(1)
         stack.push(1)
-        assertThrows<Stack.Overflow> { stack.push(1) }
+        assertThrows<BoundedStack.Overflow> { stack.push(1) }
     }
 
     @Test
     fun whenEmptyStackIsPopped_ShouldThrowUnderflow() {
-        assertThrows<Stack.Underflow> { stack.pop() }
+        assertThrows<BoundedStack.Underflow> { stack.pop() }
     }
 
     @Test
@@ -50,7 +50,12 @@ class StackTest {
 
     @Test
     fun whenCreatingSackWithNegativeSize_ShouldThrowIllegalCapacity() {
-        assertThrows<Stack.IllegalCapacity> { Stack.Make(-1) }
+        assertThrows<BoundedStack.IllegalCapacity> { BoundedStack.Make(-1) }
     }
 
+    @Test
+    fun whenCreatingStackWithZeroCapacity_AnyPushShouldOverflow() {
+        stack = BoundedStack.Make(0)
+        assertThrows<BoundedStack.Overflow> { stack.push(1) }
+    }
 }
