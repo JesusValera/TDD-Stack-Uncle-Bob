@@ -33,6 +33,10 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
         return elements[--size]
     }
 
+    override fun top(): Int {
+        return elements[size - 1]
+    }
+
     class Overflow : RuntimeException()
 
     class Underflow : RuntimeException()
@@ -55,6 +59,10 @@ class BoundedStack private constructor(private val capacity: Int) : Stack {
 
         override fun pop(): Int {
             throw Underflow()
+        }
+
+        override fun top(): Int {
+            return -1
         }
     }
 

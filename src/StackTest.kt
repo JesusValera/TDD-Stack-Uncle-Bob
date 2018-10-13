@@ -58,4 +58,13 @@ class StackTest {
         stack = BoundedStack.Make(0)
         assertThrows<BoundedStack.Overflow> { stack.push(1) }
     }
+
+    @Test
+    fun whenOneIsPushed_OneIsOnTop() {
+        stack.push(1)
+        assertEquals(1, stack.top())
+
+        stack.push(5)
+        assertEquals(5, stack.top())
+    }
 }

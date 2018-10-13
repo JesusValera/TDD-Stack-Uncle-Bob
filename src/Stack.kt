@@ -8,4 +8,6 @@ interface Stack {
 
     fun pop(): Int
 
+    fun top(): Int
+
 }
